@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rimi Gupta | LeetCode Dashboard</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family: Arial, sans-serif;
+      background:#0f172a;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:900px;
+      background:#1e293b;
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    .top{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .top h1{
+      font-size:40px;
+      color:#facc15;
+    }
+
+    .top p{
+      margin-top:10px;
+      color:#cbd5e1;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:#334155;
+      padding:20px;
+      border-radius:15px;
+      text-align:center;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+    }
+
+    .card h2{
+      font-size:18px;
+      margin-bottom:10px;
+      color:#94a3b8;
+    }
+
+    .card p{
+      font-size:28px;
+      font-weight:bold;
+    }
+
+    .easy{
+      color:#22c55e;
+    }
+
+    .medium{
+      color:#f59e0b;
+    }
+
+    .hard{
+      color:#ef4444;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:30px;
+    }
+
+    .footer a{
+      text-decoration:none;
+      color:#38bdf8;
+      font-size:18px;
+    }
+
+    .footer a:hover{
+      text-decoration:underline;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="top">
+      <h1>Rimi Gupta</h1>
+      <p>LeetCode Progress Dashboard 🚀</p>
+    </div>
+
+    <div class="stats">
+
+      <div class="card">
+        <h2>Total Solved</h2>
+        <p id="total">Loading...</p>
+      </div>
+
+      <div class="card">
+        <h2>Easy</h2>
+        <p class="easy" id="easy">0</p>
+      </div>
+
+      <div class="card">
+        <h2>Medium</h2>
+        <p class="medium" id="medium">0</p>
+      </div>
+
+      <div class="card">
+        <h2>Hard</h2>
+        <p class="hard" id="hard">0</p>
+      </div>
+
+      <div class="card">
+        <h2>Ranking</h2>
+        <p id="ranking">0</p>
+      </div>
+
+      <div class="card">
+        <h2>Acceptance Rate</h2>
+        <p id="acceptance">0%</p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a href="https://leetcode.com/u/rimi_g/" target="_blank">
+        Visit My LeetCode Profile
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+
+    const username = "rimi_g";
+
+    fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
+      .then(response => response.json())
+      .then(data => {
+
+        document.getElementById("total").innerHTML = data.totalSolved;
+        document.getElementById("easy").innerHTML = data.easySolved;
+        document.getElementById("medium").innerHTML = data.mediumSolved;
+        document.getElementById("hard").innerHTML = data.hardSolved;
+        document.getElementById("ranking").innerHTML = data.ranking;
+        document.getElementById("acceptance").innerHTML = data.acceptanceRate + "%";
+
+      })
+
+      .catch(error => {
+
+        document.getElementById("total").innerHTML = "API Error";
+
+      });
+
+  </script>
+
+</body>
+</html>
